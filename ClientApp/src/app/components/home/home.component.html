@@ -1,0 +1,77 @@
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+<div class="d-flex">
+  <div id="sidebar-wrapper">
+    <iframe src="https://ghbtns.com/github-btn.html?user=cppshane&repo=keybin&type=star&count=true&size=small" frameborder="0" scrolling="0" width="170" height="30" title="GitHub"></iframe>
+    <div id="sidebar-logo">
+      <img src="./assets/img/logo_med.png" />
+    </div>
+    <div id="search-wrapper">
+      <i class="fa fa-search" aria-hidden="true"></i>
+      <input id="search-input" type="text" spellcheck="false" [(ngModel)]="searchText" (ngModelChange)="searchTextChange()" value="{{ searchText }}"/>
+    </div>
+    <div class="list-group">
+      <div id="key-category-list-items" *ngFor="let category of keyCategories;">
+        <div class="hvr-sweep-to-right" (click)="keyCategoryItemClick(category)" href="#">
+          <p>{{ category.Title }}</p>
+          <a id="key-category-delete" href="#" (click)="deleteKeyCategoryButtonClick($event, category)">
+            <i class="fa fa-times"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div id="new-key-category">
+      <a class="hvr-underline-from-left" (click)="newKeyCategoryButtonClick()" href="#">
+        <i class="fa fa-plus"></i>
+        <p>New Category</p>
+      </a>
+    </div>
+    <div id="user-info" [ngStyle]="{'display': userInfoDisplayStyle}">
+      <img src="{{ user?.photoUrl }}" />
+      <div id="user-info-content">
+        <h1>{{ user?.name }}</h1>
+        <a href="#" (click)="userSignOut()">Sign Out</a>
+      </div>
+    </div>
+    <div id="sidebar-login-buttons" [ngStyle]="{'display': loginButtonsDisplayStyle}">
+      <div class="btn-group">
+        <a class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
+        <a class='btn btn-danger' href='#' style="width:12em;" (click)="userSignIn()"> Sign in with Google</a>
+      </div>
+    </div>
+  </div>
+  <div id="page-intro-wrapper" [ngStyle]="{'display': introPageDisplayStyle}">
+    <div id="page-intro-wrapper-background"></div>
+    <div id="page-intro-wrapper-box">
+      <h1>KeyBin</h1>
+      <h2>Forgetting shortcuts and commands is a pain</h2>
+
+      <div id="page-intro-login-buttons">
+        <div class="btn-group">
+          <a class='btn btn-danger disabled'><i class="fa fa-google-plus" style="width:16px; height:20px"></i></a>
+          <a class='btn btn-danger' href='' style="width:12em;"> Sign in with Google</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="page-content-wrapper" [ngStyle]="{'display': contentPageDisplayStyle}" *ngIf= "selectedKeyCategory">
+    <div id="page-content-title">
+      <input type="text" [(ngModel)]="selectedKeyCategory.Title" (ngModelChange)="keyCategoryTitleChange()" value="{{ selectedKeyCategory?.Title }}" />
+    </div>
+    <div id="new-key-group">
+      <div class="hvr-underline-from-left" id="new-key-group-control">
+        <i class="fa fa-plus"></i>
+        <p>New Group</p>
+      </div>
+      <div id="new-key-group-menu">
+        <a id="new-key-group-button" class="hvr-sweep-to-right" href="#" (click)="newKeyGroupButtonClick()">Key Group</a>
+        <a id="new-command-group-button" class="hvr-sweep-to-right" href="#" (click)="newCommandGroupButtonClick()">Command Group</a>
+      </div>
+      </div>
+    <div id="page-content-grid">
+      <div id="page-content-grid-item" *ngFor="let group of selectedKeyCategory.KeyGroups; let i = index;">
+        <app-key-group [keyGroup]="group" [parentKeyCategory]="selectedKeyCategory" [keyItemDisplayStates]="keyItemDisplayStates[i]"  [ngStyle]="{'display': keyGroupDisplayStates[i]}" (keyGroupChange)="keyGroupChange()"></app-key-group>
+      </div>
+    </div>
+  </div>
+</div>

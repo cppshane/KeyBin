@@ -1,0 +1,15 @@
+<div id="key-item-wrapper" [ngStyle]="{'border-bottom': keyContentGridSpanBorderStyle}">
+  <a href="#" (click)="deleteKeyItemButtonClick()">
+    <i class="fa fa-times"></i>
+  </a>
+  <div id="key-content-grid" [ngStyle]="{'display': keyContentDisplayStyle}">
+    <div id="key-content-grid-item" *ngFor="let item of contentItems; let i = index;" [ngStyle]="{'background-color': getKeyContentItemColor(i)}">
+      <p>{{ item }}</p>
+    </div>
+    <span (keydown)="keyContentItemsSpanKeyDown($event)" contenteditable="true" spellcheck="false"> </span>
+  </div>
+  <div id="command-content" [ngStyle]="{'display': commandContentDisplayStyle}">
+    <span contenteditable="true" spellcheck="false" ngDefaultControl #commandContentTextArea [(ngModel)]="keyItem.Description" (ngModelChange)="commandContentChange()" [ngStyle]="{'height': commandContentTextAreaHeightStyle}">{{ keyItem.Description }}</span>
+  </div>
+  <textarea id="description-textarea" spellcheck="false" #descriptionTextArea [(ngModel)]="keyItem.Description" (ngModelChange)="keyItemDescriptionChange()" [ngStyle]="{'height': descriptionTextAreaHeightStyle}">{{ keyItem.Description }}</textarea>
+</div>

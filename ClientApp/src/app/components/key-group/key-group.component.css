@@ -1,0 +1,65 @@
+#key-group-wrapper {
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 50px;
+  margin-bottom: 50px;
+}
+
+#key-group-wrapper:hover a {
+  opacity: 1;
+}
+
+#key-group-wrapper:hover #key-group-delete {
+  opacity: 1;
+}
+
+#key-group-delete {
+  margin-left: -20px;
+  margin-bottom: -25px;
+  margin-top: 2px;
+  width: 20px;
+  cursor: pointer;
+  opacity: 0;
+  -moz-transition: all .1s ease-in;
+  -o-transition: all .1s ease-in;
+  -webkit-transition: all .1s ease-in;
+  transition: all .1s ease-in;
+}
+
+#key-group-delete i {
+  color: #EDF1F4;
+}
+
+#key-group-title {
+  height: 30px;
+  border-bottom: thin solid;
+  border-color: #EDF1F4;
+  margin-bottom: 10px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+#key-group-title input {
+  font-family: 'Montserrat', sans-serif;
+  height: 30px;
+  border: none;
+  background-color: transparent;
+  color: #EDF1F4;
+  flex-grow: 1;
+}
+
+#key-group-title a {
+  color: #FFFFFF;
+  opacity: 0;
+  -moz-transition: all .1s ease-in;
+  -o-transition: all .1s ease-in;
+  -webkit-transition: all .1s ease-in;
+  transition: all .1s ease-in;
+}
+
+#key-group-grid {
+  display: flex;
+  flex-direction: column;
+}
