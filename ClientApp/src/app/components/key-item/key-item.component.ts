@@ -65,10 +65,10 @@ export class KeyItemComponent implements OnInit, AfterViewChecked {
   keyContentDisplayStyle;
   commandContentDisplayStyle;
   descriptionTextAreaHeightStyle = '20px';
-  commandContentTextAreaHeightStyle = '24px';
+  commandContentSpanHeightStyle = '24px';
 
   @ViewChild('descriptionTextArea', { static: false }) descriptionTextArea;
-  @ViewChild('commandContentTextArea', { static: false }) commandContentTextArea;
+  @ViewChild('commandContentSpan', { static: false }) commandContentSpan;
 
 
   // Event Emitters
@@ -118,7 +118,7 @@ export class KeyItemComponent implements OnInit, AfterViewChecked {
   }
 
   commandContentChange() {
-    this.updateCommandContentTextAreaVisualState();
+    this.updatecommandContentSpanVisualState();
 
     this.keyItemChange.emit();
   }
@@ -206,11 +206,11 @@ export class KeyItemComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  updateCommandContentTextAreaVisualState() {
-    if (this.commandContentTextArea !== undefined) {
-      this.commandContentTextAreaHeightStyle = '0px';
+  updatecommandContentSpanVisualState() {
+    if (this.commandContentSpan !== undefined) {
+      this.commandContentSpanHeightStyle = '0px';
       this.ref.detectChanges();
-      this.commandContentTextAreaHeightStyle = this.commandContentTextArea.nativeElement.scrollHeight + 'px';
+      this.commandContentSpanHeightStyle = this.commandContentSpan.nativeElement.scrollHeight + 'px';
     }
   }
 

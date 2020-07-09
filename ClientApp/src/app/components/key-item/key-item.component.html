@@ -9,7 +9,7 @@
     <span (keydown)="keyContentItemsSpanKeyDown($event)" contenteditable="true" spellcheck="false"> </span>
   </div>
   <div id="command-content" [ngStyle]="{'display': commandContentDisplayStyle}">
-    <span contenteditable="true" spellcheck="false" ngDefaultControl #commandContentTextArea [(ngModel)]="keyItem.Description" (ngModelChange)="commandContentChange()" [ngStyle]="{'height': commandContentTextAreaHeightStyle}">{{ keyItem.Description }}</span>
+    <span contenteditable="true" spellcheck="false" ngDefaultControl #commandContentSpan [(ngModel)]="keyItem.Content" (ngModelChange)="commandContentChange()" [ngStyle]="{'height': commandContentSpanHeightStyle}">{{ keyItem.Content }}</span>
   </div>
   <textarea id="description-textarea" spellcheck="false" #descriptionTextArea [(ngModel)]="keyItem.Description" (ngModelChange)="keyItemDescriptionChange()" [ngStyle]="{'height': descriptionTextAreaHeightStyle}">{{ keyItem.Description }}</textarea>
 </div>
