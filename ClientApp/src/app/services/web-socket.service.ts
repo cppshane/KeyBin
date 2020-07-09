@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { KeyCategory } from '../models/key-category.model';
 import { WebSocketMessage } from '../models/web-socket-message';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,10 @@ export class WebSocketService {
   clientId: string;
 
   startSocket(homeComponent) {
-    this.socket = new WebSocket('wss://keybin.org/ws', 'keybin-ws.json');
+    if (isDevMode())
+      this.socket = new WebSocket('wss://localhost:44313/ws', 'keybin-ws.json');
+    else
+      this.socket = new WebSocket('wss://keybin.org/ws', 'keybin-ws.json');
 
     this.socket.addEventListener("message", (ev => {
       const webSocketMessage: WebSocketMessage = JSON.parse(ev.data);

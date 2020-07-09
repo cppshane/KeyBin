@@ -36,6 +36,8 @@ namespace KeyBin.Services
                 {
                     payload = await GoogleJsonWebSignature.ValidateAsync(idToken);
 
+                    _authTokens.TryAdd(payload.Subject, payload);
+
                     return payload.Subject;
                 }
                 catch (InvalidJwtException e)
