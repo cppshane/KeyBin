@@ -18,6 +18,15 @@ namespace KeyBin
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((hostingContext, config) =>
+                {
+                    var env = hostingContext.HostingEnvironment;
+
+                    if (env.IsProduction())
+                        config.AddJsonFile("appsettings.Production.json");
+                    else if (env.IsDevelopment())
+                        config.AddJsonFile("appsettings.Development.json");
+                })
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
