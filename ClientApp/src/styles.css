@@ -248,10 +248,19 @@ textarea:focus, input:focus{
 
 #page-intro-wrapper-box {
   background: transparent;
-  width: 500px;
+  width: 600px;
   height: 400px;
-  margin: 40px 40px 240px 4px;
+  margin: 40px 40px 300px 40px;
   position: absolute;
+}
+
+#page-intro-wrapper-box iframe {
+  width: 600px;
+  height: 325px;
+  margin-top: 80px;
+  border: none;
+  border-radius: 10px;
+  justify-content: center;
 }
 
 #page-intro-wrapper-box h1 {
@@ -268,7 +277,7 @@ textarea:focus, input:focus{
   font-size: 16px;
   color: #FFFFFF;
   text-align: center;
-  margin-bottom: 70px;
+  margin-bottom: 30px;
 }
 
 #page-intro-login-buttons {
@@ -324,6 +333,7 @@ textarea:focus, input:focus{
   display: flex;
   flex-wrap: wrap;
   margin-top: 10px;
+  z-index: 1;
 }
 
 #new-key-group {
@@ -340,6 +350,7 @@ textarea:focus, input:focus{
   justify-content: center;
   align-items: center;
   height: 44px;
+  z-index: 3;
 }
 
 #new-key-group-menu {
@@ -356,6 +367,7 @@ textarea:focus, input:focus{
   -webkit-transition: all .3s ease-out;
   transition: all .3s ease-out;
   transition-delay: .3s;
+  z-index: 3;
 }
 
 #new-key-group-menu a {
