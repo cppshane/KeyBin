@@ -248,15 +248,15 @@ textarea:focus, input:focus{
 
 #page-intro-wrapper-box {
   background: transparent;
-  width: 600px;
+  width: 706px;
   height: 400px;
   margin: 40px 40px 300px 40px;
   position: absolute;
 }
 
-#page-intro-wrapper-box iframe {
-  width: 600px;
-  height: 325px;
+#page-intro-wrapper-box img {
+  width: 706px;
+  height: 393px;
   margin-top: 80px;
   border: none;
   border-radius: 10px;

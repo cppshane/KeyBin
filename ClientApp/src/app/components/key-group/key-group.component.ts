@@ -26,7 +26,7 @@ export class KeyGroupComponent {
     if (this._keyGroup.KeyGroupType === KeyGroupType.Key)
       this.keyGroupWrapperWidthStyle = '300px';
     else if (this._keyGroup.KeyGroupType === KeyGroupType.Command)
-      this.keyGroupWrapperWidthStyle = '465px';
+      this.keyGroupWrapperWidthStyle = '475px';
   }
 
   get keyGroup() {
