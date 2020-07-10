@@ -8,9 +8,9 @@ import { WebSocketService } from '../../services/web-socket.service';
   templateUrl: './app.component.html'
 })
 export class AppComponent {
-  constructor(private webSocketService: WebSocketService, private httpService: HttpService) {
+  constructor(private httpService: HttpService) {
     const clientId = Guid.create().toString();
     this.httpService.clientId = clientId;
-    this.webSocketService.clientId = clientId;
+    WebSocketService.clientId = clientId;
   }
 }

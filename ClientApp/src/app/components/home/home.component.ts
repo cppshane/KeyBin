@@ -14,7 +14,7 @@ declare const VANTA: any;
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private webSocketService: WebSocketService, private httpService: HttpService, private authService: AuthService) { }
+  constructor(private httpService: HttpService, private authService: AuthService) { }
 
 
   // Constants
@@ -82,7 +82,8 @@ export class HomeComponent implements OnInit {
       this.downloadUserKeyCategories();
     });
 
-    this.webSocketService.startSocket(this);
+    WebSocketService.homeComponent = this;
+    WebSocketService.startSocket();
   }
 
 

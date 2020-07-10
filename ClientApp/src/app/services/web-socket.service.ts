@@ -9,9 +9,10 @@ import { WebSocketMessage } from '../models/web-socket-message';
 export class WebSocketService {
 
   private static socket: WebSocket;
-  clientId: string;
+  static clientId: string;
+  static homeComponent;
 
-  startSocket(homeComponent) {
+  static startSocket() {
     if (isDevMode())
       WebSocketService.socket = new WebSocket('wss://localhost:44313/ws', 'keybin-ws.json');
     else
@@ -25,29 +26,43 @@ export class WebSocketService {
 
       switch (webSocketMessage.Type) {
         case "create_keycategory":
-          homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
+          WebSocketService.homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
           break;
         case "update_keycategory":
-          if (webSocketMessage.ClientId !== this.clientId)
-            homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
+          if (webSocketMessage.ClientId !== WebSocketService.clientId)
+            WebSocketService.homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
           break;
         case "delete_keycategory":
-          homeComponent.keyCategoryDatabaseDelete(webSocketMessage.KeyCategory);
+          WebSocketService.homeComponent.keyCategoryDatabaseDelete(webSocketMessage.KeyCategory);
           break;
         case "create_keygroup":
-          homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
+          WebSocketService.homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
           break;
         case "delete_keygroup":
-          homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
+          WebSocketService.homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
           break;
         case "create_keyitem":
-          homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
+          WebSocketService.homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
           break;
         case "delete_keyitem":
-          homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
+          WebSocketService.homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
           break;
       }
-      
+    }));
+
+    WebSocketService.socket.addEventListener("open", (ev => {
+      if (WebSocketService.homeComponent !== undefined)
+        WebSocketService.homeComponent.updateUserLoginWebSocketState();
+    }));
+
+    WebSocketService.socket.addEventListener("close", (ev => {
+      WebSocketService.startSocket();
+    }));
+
+    WebSocketService.socket.addEventListener("error", (ev => {
+      var retryDelay = 5000;
+
+      setTimeout(WebSocketService.startSocket, retryDelay);
     }));
 
     WebSocketService.keepAlive();
@@ -63,6 +78,6 @@ export class WebSocketService {
     if (WebSocketService.socket.readyState === 1)
       WebSocketService.sendMessage('');
 
-    setTimeout(this.keepAlive, timeout);
+    setTimeout(WebSocketService.keepAlive, timeout);
   }
 }
