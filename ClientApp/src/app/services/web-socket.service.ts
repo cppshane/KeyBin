@@ -8,16 +8,19 @@ import { WebSocketMessage } from '../models/web-socket-message';
 })
 export class WebSocketService {
 
-  private socket: WebSocket;
+  private static socket: WebSocket;
   clientId: string;
 
   startSocket(homeComponent) {
     if (isDevMode())
-      this.socket = new WebSocket('wss://localhost:44313/ws', 'keybin-ws.json');
+      WebSocketService.socket = new WebSocket('wss://localhost:44313/ws', 'keybin-ws.json');
     else
-      this.socket = new WebSocket('wss://keybin.org/ws', 'keybin-ws.json');
+      WebSocketService.socket = new WebSocket('wss://keybin.org/ws', 'keybin-ws.json');
 
-    this.socket.addEventListener("message", (ev => {
+    WebSocketService.socket.addEventListener("message", (ev => {
+      if (ev.data === '')
+        return;
+
       const webSocketMessage: WebSocketMessage = JSON.parse(ev.data);
 
       switch (webSocketMessage.Type) {
@@ -43,13 +46,23 @@ export class WebSocketService {
         case "delete_keyitem":
           homeComponent.keyCategoryDatabaseUpdate(webSocketMessage.KeyCategory);
           break;
-        
       }
       
     }));
+
+    WebSocketService.keepAlive();
   }
 
-  sendMessage(message) {
-    this.socket.send(message);
+  static sendMessage(message) {
+    WebSocketService.socket.send(message);
+  }
+
+  static keepAlive() {
+    var timeout = 20000;
+
+    if (WebSocketService.socket.readyState === 1)
+      WebSocketService.sendMessage('');
+
+    setTimeout(this.keepAlive, timeout);
   }
 }

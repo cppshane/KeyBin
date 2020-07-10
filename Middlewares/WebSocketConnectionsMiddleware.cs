@@ -37,7 +37,8 @@ namespace KeyBin.Middlewares
 
                     WebSocketConnection webSocketConnection = new WebSocketConnection(webSocket, _options.SendSegmentSize, textSubProtocol ?? _options.DefaultSubProtocol, _options.ReceivePayloadBufferSize);
                     webSocketConnection.ReceiveText += async (sender, message) => {
-                        webSocketConnection.UserId = await _googleAuthService.GetUserId(message);
+                        if (!message.Equals(String.Empty))
+                            webSocketConnection.UserId = await _googleAuthService.GetUserId(message);
                     };
 
                     _connectionsService.AddConnection(webSocketConnection);

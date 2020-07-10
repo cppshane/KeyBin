@@ -171,7 +171,7 @@ export class HomeComponent implements OnInit {
   }
 
   updateUserLoginWebSocketState() {
-    this.webSocketService.sendMessage(this.user == undefined ? undefined : this.user.idToken);
+    WebSocketService.sendMessage(this.user == undefined ? undefined : this.user.idToken);
   }
 
   filterSelectedKeyCategory(filterString: string) {
@@ -335,3 +335,5 @@ export class HomeComponent implements OnInit {
     event.cancelBubble = true;
   }
 }
+
+
