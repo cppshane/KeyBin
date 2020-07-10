@@ -79,6 +79,18 @@
   display: inline;
   max-width: 300px;
   width: 300px;
+  overflow-x: scroll;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#command-content::-webkit-scrollbar {
+  display: none;
+}
+
+#command-content::-webkit-scrollbar { 
+  width: 0;
+  height: 0;
 }
 
 #command-content span {
@@ -91,7 +103,9 @@
   padding-right: 8px;
   padding-top: 2px;
   padding-bottom: 4px;
-  overflow-wrap: break-word;
+  overflow-wrap: normal;
   overflow-y: scroll;
   vertical-align: top;
+  max-width: 300px;
+  width: 300px;
 }

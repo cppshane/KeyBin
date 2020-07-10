@@ -118,7 +118,9 @@ export class KeyItemComponent implements OnInit, AfterViewChecked {
   }
 
   commandContentChange() {
-    this.updatecommandContentSpanVisualState();
+    this.updateCommandContentSpanVisualState();
+
+    this.keyItem.Content = this.commandContentSpan.nativeElement.innerText;
 
     this.keyItemChange.emit();
   }
@@ -132,7 +134,15 @@ export class KeyItemComponent implements OnInit, AfterViewChecked {
   }
 
   ngAfterViewChecked() {
+    if (this.parentKeyGroup.KeyGroupType === KeyGroupType.Command) {
+      if (this.commandContentSpan.nativeElement.innerText !== this.keyItem.Content)
+        this.commandContentSpan.nativeElement.innerText = this.keyItem.Content;
+
+      this.updateCommandContentSpanVisualState();
+    }
+
     this.updateDescriptionTextAreaVisualState()
+
     this.ref.detectChanges();
   }
 
@@ -206,7 +216,7 @@ export class KeyItemComponent implements OnInit, AfterViewChecked {
     }
   }
 
-  updatecommandContentSpanVisualState() {
+  updateCommandContentSpanVisualState() {
     if (this.commandContentSpan !== undefined) {
       this.commandContentSpanHeightStyle = '0px';
       this.ref.detectChanges();
