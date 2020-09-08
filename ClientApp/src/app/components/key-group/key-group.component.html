@@ -10,7 +10,7 @@
   </div>
   <div id="key-group-grid">
     <div if="key-group-grid-item" *ngFor="let item of keyGroup.KeyItems;">
-      <app-key-item [keyItem]="item" [parentKeyGroup]="keyGroup" [parentKeyCategory]="parentKeyCategory" [ngStyle]="{'display': keyItemDisplayStates[i]}" (keyItemChange)="keyItemChange()" (deleteKeyItem)="deleteKeyItem(item)"></app-key-item>
+      <app-key-item [keyItem]="item" [parentKeyGroup]="keyGroup" [parentKeyCategory]="parentKeyCategory" [ngStyle]="{'display': keyItemDisplayStates[i]}" (keyItemFocus)="keyItemFocus(item)" (keyItemChange)="keyItemChange()" (deleteKeyItem)="deleteKeyItem(item)"></app-key-item>
     </div>
   </div>
 </div>

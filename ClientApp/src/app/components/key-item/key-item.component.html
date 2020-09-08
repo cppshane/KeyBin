@@ -1,4 +1,4 @@
-<div id="key-item-wrapper" [ngStyle]="{'border-bottom': keyContentGridSpanBorderStyle}">
+<div id="key-item-wrapper" [ngStyle]="{'border-bottom': keyContentGridSpanBorderStyle}" (click)="keyItemClick()">
   <a href="#" (click)="deleteKeyItemButtonClick()">
     <i class="fa fa-times"></i>
   </a>

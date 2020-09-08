@@ -36,7 +36,15 @@ export class KeyGroupComponent {
 
   // Fields
 
+  @Input() set keyGroupFocusState(value: boolean) {
+    if (!value) {
+      this.focusedKeyItem = null;
+    }
+  }
+
   @Input() keyItemDisplayStates = [];
+
+  focusedKeyItem = null;
 
   keyGroupWrapperWidthStyle;
 
@@ -56,6 +64,10 @@ export class KeyGroupComponent {
     this.keyGroupChange.emit();
   }
 
+  keyItemFocus(keyItem) {
+    this.focusedKeyItem = keyItem;
+  }
+
   deleteKeyItem(keyItem) {
     const index = this.keyGroup.KeyItems.findIndex(item => keyItem === item);
 
@@ -67,7 +79,12 @@ export class KeyGroupComponent {
   }
 
   createItemButtonClick() {
-    this.httpService.createKeyItem(this.parentKeyCategory.Id, this.keyGroup.Id);
+    let newKeyItemIndex = this.keyGroup.KeyItems.findIndex(item => this.focusedKeyItem === item);
+
+    if (newKeyItemIndex !== -1)
+      newKeyItemIndex++;
+
+    this.httpService.createKeyItem(this.parentKeyCategory.Id, this.keyGroup.Id, newKeyItemIndex);
   }
 
   deleteKeyGroupButtonClick() {

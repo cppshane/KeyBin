@@ -84,10 +84,11 @@ export class HttpService {
         error => console.error(error));
   }
 
-  createKeyItem(keyCategoryId: string, keyGroupId: string) {
+  createKeyItem(keyCategoryId: string, keyGroupId: string, keyItemIndex: number) {
     let httpParams: HttpParams = new HttpParams();
     httpParams = httpParams.append('keyCategoryId', keyCategoryId);
     httpParams = httpParams.append('keyGroupId', keyGroupId);
+    httpParams = httpParams.append('keyItemIndex', keyItemIndex.toString());
     httpParams = httpParams.append('idToken', this.idToken);
 
     this.httpClient.post(this.baseUrl + 'keycategory/CreateKeyItem', null,

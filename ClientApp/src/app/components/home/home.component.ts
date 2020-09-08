@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit {
 
   searchText: string;
 
+  keyGroupFocusStates = new Array<boolean>();
   keyGroupDisplayStates = new Array<string>();
   keyItemDisplayStates = new Array<Array<string>>();
 
@@ -115,6 +116,15 @@ export class HomeComponent implements OnInit {
 
   keyGroupChange() {
     this.uploadKeyCategory(this.selectedKeyCategory);
+  }
+
+  keyGroupClick(keyGroupInput) {
+    for (const [keyGroupIndex, keyGroup] of this.selectedKeyCategory.KeyGroups.entries()) {
+      if (keyGroup.Id !== keyGroupInput.KeyGroup.Id)
+        this.keyGroupFocusStates[keyGroupIndex] = false;
+      else
+        this.keyGroupFocusStates[keyGroupIndex] = true;
+    }
   }
 
   searchTextChange() {
@@ -274,12 +284,12 @@ export class HomeComponent implements OnInit {
             this.selectedKeyCategory.KeyGroups[foundGroupIndex].KeyItems.splice(keyItemIndex, 1);
         }
 
-        for (const keyItem of keyGroup.KeyItems) {
+        for (const [keyItemIndex, keyItem] of keyGroup.KeyItems.entries()) {
           const foundItemIndex = foundGroup.KeyItems.findIndex(keyItemIndexer => keyItemIndexer.Id === keyItem.Id);
 
           // Add new KeyItem
           if (foundItemIndex === -1)
-            this.selectedKeyCategory.KeyGroups[foundGroupIndex].KeyItems.push(keyItem);
+            this.selectedKeyCategory.KeyGroups[foundGroupIndex].KeyItems.splice(keyItemIndex, 0, keyItem);
 
           // Update existing KeyItems
           else {

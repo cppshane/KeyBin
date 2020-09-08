@@ -177,7 +177,7 @@ namespace KeyBin.Controllers
         }
 
         [HttpPost("CreateKeyItem")]
-        public async Task<IActionResult> CreateKeyItem(string keyCategoryId, string keyGroupId, string idToken, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateKeyItem(string keyCategoryId, string keyGroupId, int keyItemIndex, string idToken, CancellationToken cancellationToken)
         {
             string userId = await _googleAuthService.GetUserId(idToken);
 
@@ -205,7 +205,17 @@ namespace KeyBin.Controllers
             keyItem.Content = "";
             keyItem.Description = "";
 
-            keyGroup.KeyItems = keyGroup.KeyItems.Append(keyItem);
+            if (keyItemIndex != -1)
+            {
+                List<KeyItem> newKeyItemList = keyGroup.KeyItems.ToList();
+                newKeyItemList.Insert(keyItemIndex, keyItem);
+
+                keyGroup.KeyItems = newKeyItemList;
+            }
+            else
+            {
+                keyGroup.KeyItems = keyGroup.KeyItems.Append(keyItem);
+            }
 
             _keyCategoryService.UpdateKeyCategory(keyCategory);
 

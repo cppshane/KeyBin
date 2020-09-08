@@ -70,7 +70,7 @@
       </div>
     <div id="page-content-grid">
       <div id="page-content-grid-item" *ngFor="let group of selectedKeyCategory.KeyGroups; let i = index;">
-        <app-key-group [keyGroup]="group" [parentKeyCategory]="selectedKeyCategory" [keyItemDisplayStates]="keyItemDisplayStates[i]"  [ngStyle]="{'display': keyGroupDisplayStates[i]}" (keyGroupChange)="keyGroupChange()"></app-key-group>
+        <app-key-group [keyGroup]="group" [parentKeyCategory]="selectedKeyCategory" [keyItemDisplayStates]="keyItemDisplayStates[i]" [keyGroupFocusState]="keyGroupFocusStates[i]" [ngStyle]="{'display': keyGroupDisplayStates[i]}" (keyGroupChange)="keyGroupChange()" (click)="keyGroupClick(group);"></app-key-group>
       </div>
     </div>
   </div>

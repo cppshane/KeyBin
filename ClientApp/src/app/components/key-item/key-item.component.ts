@@ -74,6 +74,7 @@ export class KeyItemComponent implements OnInit, AfterViewChecked {
   // Event Emitters
 
   @Output() keyItemChange = new EventEmitter();
+  @Output() keyItemFocus = new EventEmitter();
 
 
   // Events
@@ -127,6 +128,10 @@ export class KeyItemComponent implements OnInit, AfterViewChecked {
 
   deleteKeyItemButtonClick() {
     this.httpService.deleteKeyItem(this.parentKeyCategory.Id, this.parentKeyGroup.Id, this.keyItem.Id);
+  }
+
+  keyItemClick() {
+    this.keyItemFocus.emit();
   }
 
   ngOnInit() {
