@@ -74,6 +74,10 @@ export class HomeComponent implements OnInit {
       }
       else {
         this.httpService.idToken = this.user.idToken;
+
+        if (window.innerWidth < 1000) {
+          this.showSidebar();
+        }
       }
 
       this.updateUserLoginWebSocketState();
