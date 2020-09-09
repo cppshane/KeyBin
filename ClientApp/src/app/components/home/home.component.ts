@@ -52,6 +52,8 @@ export class HomeComponent implements OnInit {
 
   pageState = this.introPageState;
 
+  introPageSignInClicked = false;
+
   introPageDisplayStyle = '';
   contentPageDisplayStyle = 'none';
 
@@ -71,11 +73,13 @@ export class HomeComponent implements OnInit {
         this.updatePageContentVisualState(this.introPageState);
 
         this.httpService.idToken = undefined;
+
+        this.introPageSignInClicked = false;
       }
       else {
         this.httpService.idToken = this.user.idToken;
 
-        if (window.innerWidth < 1000) {
+        if (window.innerWidth < 1000 && this.introPageSignInClicked) {
           this.showSidebar();
         }
       }
@@ -181,6 +185,11 @@ export class HomeComponent implements OnInit {
 
   menuClick() {
     this.showSidebar();
+  }
+
+  pageIntroSignInClick() {
+    this.introPageSignInClicked = true;
+    this.userSignIn();
   }
 
   pageIntroWrapperClick() {
