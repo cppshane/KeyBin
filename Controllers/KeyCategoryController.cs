@@ -105,7 +105,7 @@ namespace KeyBin.Controllers
         }
 
         [HttpPost("CreateKeyGroup")]
-        public async Task<IActionResult> CreateKeyGroup(string keyCategoryId, KeyGroupType keyGroupType, string idToken, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateKeyGroup(string keyCategoryId, KeyGroupType keyGroupType, int keyGroupIndex, string idToken, CancellationToken cancellationToken)
         {
             string userId = await _googleAuthService.GetUserId(idToken);
 
@@ -133,7 +133,17 @@ namespace KeyBin.Controllers
             else if (keyGroup.KeyGroupType == KeyGroupType.Command)
                 keyGroup.Title = "New Command Group";
 
-            keyCategory.KeyGroups = keyCategory.KeyGroups.Append(keyGroup);
+            if (keyGroupIndex != -1)
+            {
+                List<KeyGroup> newKeyGroupList = keyCategory.KeyGroups.ToList();
+                newKeyGroupList.Insert(keyGroupIndex, keyGroup);
+
+                keyCategory.KeyGroups = newKeyGroupList;
+            }
+            else
+            {
+                keyCategory.KeyGroups = keyCategory.KeyGroups.Append(keyGroup);
+            }
 
             _keyCategoryService.UpdateKeyCategory(keyCategory);
 

@@ -120,7 +120,7 @@ export class HomeComponent implements OnInit {
 
   keyGroupClick(keyGroupInput) {
     for (const [keyGroupIndex, keyGroup] of this.selectedKeyCategory.KeyGroups.entries()) {
-      if (keyGroup.Id !== keyGroupInput.KeyGroup.Id)
+      if (keyGroup.Id !== keyGroupInput.Id)
         this.keyGroupFocusStates[keyGroupIndex] = false;
       else
         this.keyGroupFocusStates[keyGroupIndex] = true;
@@ -152,11 +152,21 @@ export class HomeComponent implements OnInit {
   }
 
   newKeyGroupButtonClick() {
-    this.httpService.createKeyGroup(this.selectedKeyCategory.Id, KeyGroupType.Key);
+    let newKeyGroupIndex = this.keyGroupFocusStates.findIndex(keyGroupFocusState => keyGroupFocusState);
+
+    if (newKeyGroupIndex !== -1)
+      newKeyGroupIndex++;
+
+    this.httpService.createKeyGroup(this.selectedKeyCategory.Id, KeyGroupType.Key, newKeyGroupIndex);
   }
 
   newCommandGroupButtonClick() {
-    this.httpService.createKeyGroup(this.selectedKeyCategory.Id, KeyGroupType.Command);
+    let newKeyGroupIndex = this.keyGroupFocusStates.findIndex(keyGroupFocusState => keyGroupFocusState);
+
+    if (newKeyGroupIndex !== -1)
+      newKeyGroupIndex++;
+
+    this.httpService.createKeyGroup(this.selectedKeyCategory.Id, KeyGroupType.Command, newKeyGroupIndex);
   }
 
   keyCategoryTitleChange() {
@@ -292,12 +302,12 @@ export class HomeComponent implements OnInit {
         this.selectedKeyCategory.KeyGroups.splice(keyGroupIndex, 1);
     }
 
-    for (const keyGroup of keyCategory.KeyGroups) {
+    for (const [keyGroupIndex, keyGroup] of keyCategory.KeyGroups.entries()) {
       const foundGroupIndex = this.selectedKeyCategory.KeyGroups.findIndex(keyGroupIndexer => keyGroupIndexer.Id === keyGroup.Id);
 
       // Add new KeyGroup
       if (foundGroupIndex === -1)
-        this.selectedKeyCategory.KeyGroups.push(keyGroup);
+        this.selectedKeyCategory.KeyGroups.splice(keyGroupIndex, 0, keyGroup);
 
       // Update existing KeyGroups
       else {

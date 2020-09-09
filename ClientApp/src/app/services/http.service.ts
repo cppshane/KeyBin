@@ -60,10 +60,11 @@ export class HttpService {
         error => console.error(error));
   }
 
-  createKeyGroup(keyCategoryId: string, keyGroupType) {
+  createKeyGroup(keyCategoryId: string, keyGroupType, keyGroupIndex: number) {
     let httpParams: HttpParams = new HttpParams();
     httpParams = httpParams.append('keyCategoryId', keyCategoryId);
     httpParams = httpParams.append('keyGroupType', keyGroupType);
+    httpParams = httpParams.append('keyGroupIndex', keyGroupIndex.toString());
     httpParams = httpParams.append('idToken', this.idToken);
 
     this.httpClient.post(this.baseUrl + 'keycategory/CreateKeyGroup', null,
