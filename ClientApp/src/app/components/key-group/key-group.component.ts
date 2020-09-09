@@ -23,10 +23,15 @@ export class KeyGroupComponent {
   @Input() set keyGroup(value: KeyGroup) {
     this._keyGroup = value;
 
-    if (this._keyGroup.KeyGroupType === KeyGroupType.Key)
+    if (window.innerWidth < 500) {
       this.keyGroupWrapperWidthStyle = '300px';
-    else if (this._keyGroup.KeyGroupType === KeyGroupType.Command)
-      this.keyGroupWrapperWidthStyle = '475px';
+    }
+    else {
+      if (this._keyGroup.KeyGroupType === KeyGroupType.Key)
+        this.keyGroupWrapperWidthStyle = '300px';
+      else if (this._keyGroup.KeyGroupType === KeyGroupType.Command)
+        this.keyGroupWrapperWidthStyle = '375px';
+    }
   }
 
   get keyGroup() {
@@ -55,6 +60,18 @@ export class KeyGroupComponent {
 
 
   // Events
+
+  onResize() {
+    if (window.innerWidth < 500) {
+      this.keyGroupWrapperWidthStyle = '300px';
+    }
+    else {
+      if (this._keyGroup.KeyGroupType === KeyGroupType.Key)
+        this.keyGroupWrapperWidthStyle = '300px';
+      else if (this._keyGroup.KeyGroupType === KeyGroupType.Command)
+        this.keyGroupWrapperWidthStyle = '375px';
+    }
+  }
 
   keyGroupTitleChange() {
     this.keyGroupChange.emit();

@@ -12,6 +12,16 @@ textarea:focus, input:focus{
   outline: none;
 }
 
+#menu-img {
+  position: absolute;
+  margin-top: 25px;
+  margin-left: 25px;
+  width: 25px;
+  height: 25px;
+  z-index: 4;
+  cursor: pointer;
+}
+
 /* User Info */
 
 #user-info {
@@ -58,7 +68,11 @@ textarea:focus, input:focus{
   position: fixed;
   display: flex;
   flex-direction: column;
+  z-index: 5;
+  left: 0;
+  transition: 0.2s;
 }
+
 
 #sidebar-wrapper iframe {
   margin: 10px 0px 0px 10px;
@@ -232,13 +246,14 @@ textarea:focus, input:focus{
 /* Intro Page */
 
 #page-intro-wrapper {
-  width: 100%;
   height: 100vh;
-  margin-left: 275px;
   background-color: #202b33;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  z-index: 1;
+  position: absolute;
 }
 
 #page-intro-wrapper-background {
@@ -248,9 +263,8 @@ textarea:focus, input:focus{
 
 #page-intro-wrapper-box {
   background: transparent;
-  width: 706px;
   height: 400px;
-  margin: 40px 40px 300px 40px;
+  margin: 40px 40px 300px 315px;
   position: absolute;
 }
 
@@ -304,11 +318,12 @@ textarea:focus, input:focus{
 
 #page-content-wrapper {
   width: 100%;
+  z-index: 1;
+  position: absolute;
   height: 100vh;
-  margin-left: 275px;
   background-color: #202b33;
   overflow-y: scroll;
-  padding: 50px 32px 50px 50px;
+  padding: 50px 32px 50px 325px;
 }
 
 #page-content-title {
@@ -407,3 +422,26 @@ textarea:focus, input:focus{
 }
 
 
+@media only screen and (max-width: 1000px) {
+  #sidebar-wrapper {
+    left: -275px;
+  }
+  #page-intro-wrapper-box {
+    margin: 40px 40px 100px 40px;
+  }
+  #page-content-wrapper {
+    padding: 50px 32px 50px 50px;
+  }
+  #keybin-demo-img {
+    display: none;
+  }
+  #new-key-group {
+    top: 20px;
+    right: 10px;
+  }
+  #page-content-wrapper {
+    padding-top: 75px;
+    padding-left: 30px;
+    padding-right: 0px;
+  }
+}

@@ -1,4 +1,4 @@
-<div id="key-group-wrapper" [ngStyle]="{'width': keyGroupWrapperWidthStyle}">
+<div id="key-group-wrapper" [ngStyle]="{'width': keyGroupWrapperWidthStyle}" (window:resize)="onResize()">
   <div id="key-group-delete" (click)="deleteKeyGroupButtonClick()">
     <i class="fa fa-times"></i>
   </div>

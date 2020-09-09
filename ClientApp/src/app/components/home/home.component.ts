@@ -163,6 +163,27 @@ export class HomeComponent implements OnInit {
     this.uploadKeyCategory(this.selectedKeyCategory);
   }
 
+  menuClick() {
+    this.showSidebar();
+  }
+
+  pageIntroWrapperClick() {
+    if (window.innerWidth < 1000)
+      this.hideSidebar();
+  }
+
+  pageContentWrapperClick() {
+    if (window.innerWidth < 1000)
+      this.hideSidebar();
+  }
+
+  onResize() {
+    if (window.innerWidth < 1000)
+      this.hideSidebar();
+    else
+      this.showSidebar();
+  }
+
 
   // Functions
 
@@ -210,6 +231,14 @@ export class HomeComponent implements OnInit {
       else
         this.keyGroupDisplayStates[keyGroupIndex] = '';
     }
+  }
+
+  showSidebar() {
+    document.getElementById('sidebar-wrapper').style.left = '0px';
+  }
+
+  hideSidebar() {
+    document.getElementById('sidebar-wrapper').style.left = '-275px';
   }
 
   userSignIn() {
