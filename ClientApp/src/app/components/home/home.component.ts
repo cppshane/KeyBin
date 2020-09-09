@@ -138,6 +138,8 @@ export class HomeComponent implements OnInit {
   }
 
   deleteKeyCategoryButtonClick(event, keyCategory: KeyCategory) {
+    this.keyGroupFocusStates = [];
+
     if (this.selectedKeyCategory && this.selectedKeyCategory.Id === keyCategory.Id)
       this.updatePageContentVisualState(this.introPageState);
 

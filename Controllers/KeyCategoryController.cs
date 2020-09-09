@@ -133,7 +133,7 @@ namespace KeyBin.Controllers
             else if (keyGroup.KeyGroupType == KeyGroupType.Command)
                 keyGroup.Title = "New Command Group";
 
-            if (keyGroupIndex != -1)
+            if (keyCategory.KeyGroups.Count() > keyGroupIndex && keyGroupIndex != -1)
             {
                 List<KeyGroup> newKeyGroupList = keyCategory.KeyGroups.ToList();
                 newKeyGroupList.Insert(keyGroupIndex, keyGroup);
