@@ -12,7 +12,19 @@ import { KeyGroupType } from '../../enums/key-group-type.enum';
 })
 export class KeyItemComponent implements OnInit, AfterViewChecked {
 
-  constructor(private httpService: HttpService, private ref: ChangeDetectorRef, private element: ElementRef) { }
+  constructor(private httpService: HttpService, private ref: ChangeDetectorRef, private element: ElementRef)
+  {
+    this.contentChangeUpdater();
+  }
+
+  // Hack solution to updating KeyContent, since it has to be formatted manually and is not
+  // explicitly bound to a view like CommandContent is. Fix this later.
+  contentChangeUpdater() {
+    setTimeout(async () => {
+      this.updateContentItems();
+      await this.contentChangeUpdater();
+    }, 50);
+  }
 
 
   // Model
@@ -119,6 +131,7 @@ export class KeyItemComponent implements OnInit, AfterViewChecked {
   }
 
   commandContentChange() {
+    // Standard handling for CommandContent changes
     this.updateCommandContentSpanVisualState();
 
     this.keyItem.Content = this.commandContentSpan.nativeElement.innerText;
