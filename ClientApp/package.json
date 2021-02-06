@@ -30,7 +30,7 @@
     "font-awesome": "^4.7.0",
     "guid-typescript": "^1.0.9",
     "hover.css": "^2.3.2",
-    "jquery": "3.4.1",
+    "jquery": "3.5.0",
     "oidc-client": "^1.9.1",
     "popper.js": "^1.16.0",
     "sockjs-client": "^1.4.0",
